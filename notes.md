@@ -22,9 +22,8 @@ gcc -g calc.c -o calc
 # dump Intex x86 assembly
 objdump -d calc
 
-# dump machine code
-xxd -b hello_world
-
+# display the machine code
+xxd -b calc
 ```
 
 - disassemble using gdb
@@ -41,13 +40,23 @@ gdb calc
 
 #disassemble
 disassemble /rm main
+# disassemble without symbols
+disassemble /r main
 
 # dump machine code to a file
 # +31 will vary... after you do disassemble command, you will see the correct offset
-dump memory main_dump.bin main main+31
+
 
 # if you re-compile, then reload the new executable binary
-
 file calc
+
+```
+
+- to view the machine code dump
+
+```bash
+
+# display the machine code
+xxd -b main_dump.bin
 
 ```

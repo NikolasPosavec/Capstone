@@ -2,8 +2,8 @@
 
 int main() {
 
-    int x = 2;
-    int y = 3;
+    int x = 4;
+    int y = 5;
     int sum = 0;
 
     sum = x + y;
