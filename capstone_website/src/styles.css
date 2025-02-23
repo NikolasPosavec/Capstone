@@ -1,0 +1,35 @@
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .page-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .title {
+    color: #ff0000;
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .interactive-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .interactive-button:hover {
+    background-color: #cc0000;
+  }
+  
