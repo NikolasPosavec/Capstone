@@ -29,3 +29,21 @@ button {
 button:hover {
   background-color: #cc0000;
 }
+
+/* src/App.css */
+.back-home-btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 30px;  /* Space above the button */
+  display: inline-block;
+}
+
+.back-home-btn:hover {
+  background-color: #cc0000;
+}
+

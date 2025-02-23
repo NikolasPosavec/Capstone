@@ -1,48 +1,77 @@
 /* src/pages/Home.css */
 .home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1a1a1a;
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  .content-container {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 20px;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: #ff0000;
-  }
-  
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .nav-button {
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-  }
-  
-  .nav-button:hover {
-    background-color: #cc0000;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 0 20px;
+}
+
+.content-container {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ff0000;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.landing-image {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.languages-section {
+  margin-top: 40px;
+  text-align: left;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.languages-list {
+  font-size: 1.1rem;
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.languages-list li {
+  margin: 12px 0;
+}
+
+.button-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.button {
+  text-decoration: none;
+  background-color: #ff0000;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #cc0000;
+}

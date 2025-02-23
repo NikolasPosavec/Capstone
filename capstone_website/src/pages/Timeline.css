@@ -1,27 +1,71 @@
 /* src/pages/Timeline.css */
 .timeline-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1a1a1a;
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  .content-container {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 20px;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: #ff0000;
-  }
-  
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
+  text-align: center;
+  padding: 50px;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ff0000;
+}
+
+.timeline {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 100px;  /* Adjusted margin */
+  position: relative;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ff0000;
+  z-index: 0;
+}
+
+.timeline-item {
+  position: relative;
+  z-index: 1;
+  margin: 20px;
+  text-align: center;
+  width: 150px;
+}
+
+.timeline-item span {
+  display: block;
+  background-color: #ff0000;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;  /* Centered vertically */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.timeline-item h3 {
+  margin-top: 10px;  /* Reduced margin */
+  font-size: 1.2rem;
+}
+
+.timeline-item p {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+/* Adjust text to be below the dot */
+.timeline-item .text-above {
+  margin-bottom: 75px;  /* Moves text above the dot */
+}
+
+.timeline-item .text-below {
+  margin-top: 75px;  /* Moves text below the dot */
+}
