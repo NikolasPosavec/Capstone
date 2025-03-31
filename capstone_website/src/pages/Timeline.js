@@ -3,68 +3,52 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Timeline.css';
 
+const languages = [
+  {
+    id: "machine-code",
+    year: "Pre-1957",
+    name: "Machine Code & Assembly",
+    description: "The foundation of all programming - direct hardware interaction",
+    image: "punch_cards.jpg"
+  },
+  {
+    id: "fortran",
+    year: "1957",
+    name: "Fortran",
+    description: "Pioneering scientific computing and high-performance applications"
+  },
+  // Add other languages following the same pattern
+];
+
 function Timeline() {
   return (
     <div className="timeline-container">
-      <h1>Programming Languages Evolution</h1>
-      <div className="timeline">
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">Pre-1957: Machine Code & Assembly</h3>
-          <p className="text-below">Low-level hardware interaction</p>
+      <div className="timeline-content">
+        <h1>Programming Languages Evolution</h1>
+        
+        <div className="timeline">
+          <div className="timeline-items">
+            {languages.map((lang) => (
+              <div key={lang.id} className="timeline-item">
+                <div className="timeline-dot"></div>
+                <Link to={`/timeline/${lang.id}`} className="timeline-card-link">
+                  <div className="timeline-card">
+                    <div className="timeline-year">{lang.year}</div>
+                    <h3>{lang.name}</h3>
+                    <p>{lang.description}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1957: Fortran</h3>
-          <p className="text-below">Scientific computing</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1959: COBOL</h3>
-          <p className="text-below">Business applications</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1972: C</h3>
-          <p className="text-below">System programming and efficiency</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1995: Java</h3>
-          <p className="text-below">Platform independence and OOP</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1991: Python</h3>
-          <p className="text-below">Simplicity and versatility</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">1995: JavaScript</h3>
-          <p className="text-below">Web interactivity</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">2007: Scratch</h3>
-          <p className="text-below">Introductory visual programming</p>
-        </div>
-
-        <div className="timeline-item">
-          <span></span>
-          <h3 className="text-above">2009: Go</h3>
-          <p className="text-below">Modern concurrency</p>
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/" className="back-home-btn">
+            ← Back to Home
+          </Link>
         </div>
       </div>
-
-      {/* Back to Home button */}
-      <Link to="/" className="back-home-btn">Back to Home</Link>
     </div>
   );
 }

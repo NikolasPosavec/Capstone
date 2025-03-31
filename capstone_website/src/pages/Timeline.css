@@ -1,71 +1,127 @@
 /* src/pages/Timeline.css */
-.timeline-container {
-  text-align: center;
-  padding: 50px;
-  background-color: #1a1a1a;
-  color: white;
+:root {
+  --primary: #ff4757;
+  --primary-dark: #e84118;
+  --dark: #1e272e;
+  --darker: #1a1a1a;
+  --light: #f5f6fa;
+  --gray: #7f8fa6;
+  --timeline-line: rgba(255, 71, 87, 0.5);
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #ff0000;
-}
+/* Existing timeline styles... */
 
-.timeline {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 100px;  /* Adjusted margin */
-  position: relative;
-}
-
-.timeline:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #ff0000;
-  z-index: 0;
-}
-
-.timeline-item {
-  position: relative;
-  z-index: 1;
-  margin: 20px;
-  text-align: center;
-  width: 150px;
-}
-
-.timeline-item span {
+.timeline-card-link {
+  text-decoration: none;
+  color: inherit;
   display: block;
-  background-color: #ff0000;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;  /* Centered vertically */
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
-.timeline-item h3 {
-  margin-top: 10px;  /* Reduced margin */
-  font-size: 1.2rem;
+.timeline-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.timeline-item p {
-  font-size: 1rem;
-  margin-top: 5px;
+.timeline-card-link:hover .timeline-card {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Adjust text to be below the dot */
-.timeline-item .text-above {
-  margin-bottom: 75px;  /* Moves text above the dot */
+/* Entry page styles */
+.entry-container {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+  color: var(--light);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.timeline-item .text-below {
-  margin-top: 75px;  /* Moves text below the dot */
+.entry-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.entry-body {
+  line-height: 1.6;
+  margin: 2rem 0;
+}
+
+.entry-body p {
+  margin-bottom: 1.5rem;
+}
+
+.entry-year {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.entry-image {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.entry-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.code-comparison {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+
+.code-comparison h4 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.code-comparison p {
+  margin-bottom: 0.5rem;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.back-home-btn {
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-home-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .entry-container {
+    padding: 2rem 1rem;
+  }
+  
+  .entry-content {
+    padding: 0 1rem;
+  }
 }
