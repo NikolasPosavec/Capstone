@@ -1,0 +1,73 @@
+/* src/pages/TimelineEntry.css */
+.entry-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(30, 39, 46, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    color: var(--light);
+  }
+  
+  .entry-content {
+    line-height: 1.6;
+  }
+  
+  .entry-year {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .image-container {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  
+  .centered-image {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  
+  .image-caption {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+  
+  .entry-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .back-btn, .back-home-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  .back-btn:hover, .back-home-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .entry-container {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+    
+    .entry-footer {
+      flex-direction: column;
+    }
+  }

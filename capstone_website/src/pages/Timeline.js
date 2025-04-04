@@ -1,4 +1,3 @@
-// src/pages/Timeline.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Timeline.css';
@@ -67,7 +66,6 @@ function Timeline() {
         <h1>Programming Languages Evolution</h1>
         
         <div className="timeline">
-          <div className="timeline-line"></div>
           <div className="timeline-items">
             {languages.map((lang, index) => (
               <div 
@@ -85,7 +83,7 @@ function Timeline() {
           </div>
         </div>
 
-        <div style={{ textAlign: 'center' }}>
+        <div className="timeline-footer">
           <Link to="/" className="back-home-btn">
             ← Back to Home
           </Link>

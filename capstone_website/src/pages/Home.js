@@ -1,4 +1,3 @@
-// src/pages/Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
@@ -43,7 +42,18 @@ function Home() {
   return (
     <div className="home-container">
       <div className="content-container">
-        <h1>Evolution of Programming Languages</h1>
+        <div className="hero-section">
+          <h1>Explore the Evolution of Programming Languages</h1>
+          <p className="hero-subtitle">
+            From machine code to modern abstractions - discover how programming languages 
+            have shaped the digital world
+          </p>
+          <div className="button-section">
+            <Link to="/timeline" className="button">Explore Timeline</Link>
+            <Link to="/testbench" className="button">Try Test Bench</Link>
+          </div>
+        </div>
+
         <img 
           src={landingImage} 
           alt="Programming Languages Evolution" 
@@ -64,11 +74,6 @@ function Home() {
               </div>
             ))}
           </div>
-        </section>
-
-        <section className="button-section">
-          <Link to="/timeline" className="button">Explore the Timeline</Link>
-          <Link to="/testbench" className="button">Try the Test Bench</Link>
         </section>
       </div>
     </div>

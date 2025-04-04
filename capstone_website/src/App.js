@@ -1,14 +1,23 @@
-// src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import TimelineEntry from './pages/TimelineEntry';
 import TestBench from './pages/TestBench';
+import './App.css';
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    document.body.className = darkMode ? 'dark-mode' : 'light-mode';
+  }, [darkMode]);
+
   return (
     <Router>
+      <div className={`theme-toggle ${darkMode ? 'dark' : 'light'}`} onClick={() => setDarkMode(!darkMode)}>
+        {darkMode ? '☀️' : '🌙'}
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/timeline" element={<Timeline />} />

@@ -1,64 +1,94 @@
-// src/pages/TestBench.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TestBench.css';
-import { FaBalanceScale, FaClock, FaMemory, FaChartLine, FaMicrochip } from 'react-icons/fa';
+import { FaBalanceScale, FaClock, FaMemory } from 'react-icons/fa';
+import { Highlight, themes } from 'prism-react-renderer';
+import axios from 'axios';
+
+// Code Compiler API Configuration
+const CODE_COMPILER_API = {
+  url: 'https://code-compiler.p.rapidapi.com/v2',
+  key: '9c06a68623msh0d9e2121cbc0214p170d53jsn277073b7a1cc',
+  host: 'code-compiler.p.rapidapi.com'
+};
+
+// Language mappings for Code Compiler API
+const languageMappings = {
+  'Python': '5',
+  'JavaScript': '17',
+  'Java': '4',
+  'C': '6',
+  'C++': '7'
+};
 
 function TestBench() {
   const languages = [
     {
-      name: "Machine Code & Assembly",
-      description: "The foundation of all programming - direct hardware interaction",
-      example: "mov eax, 1\nmov ebx, 2\nadd eax, ebx"
-    },
-    {
-      name: "Fortran",
-      description: "Pioneering scientific computing and high-performance applications",
-      example: "program hello\n  print *, 'Hello, World!'\nend program hello"
-    },
-    {
-      name: "COBOL",
-      description: "Business-oriented language that powered early enterprise systems",
-      example: "IDENTIFICATION DIVISION.\nPROGRAM-ID. HELLO.\nPROCEDURE DIVISION.\n    DISPLAY 'Hello, World!'.\nSTOP RUN."
-    },
-    {
-      name: "C",
-      description: "The building block of modern system programming and operating systems",
-      example: "#include <stdio.h>\n\nint main() {\n  printf(\"Hello, World!\");\n  return 0;\n}"
-    },
-    {
-      name: "Java",
-      description: "\"Write once, run anywhere\" revolutionized cross-platform development",
-      example: "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}"
-    },
-    {
       name: "Python",
-      description: "Readability and versatility made it today's most popular language",
-      example: "print(\"Hello, World!\")"
+      description: "High-level scripting",
+      example: `def factorial(n):
+    return 1 if n <= 1 else n * factorial(n-1)
+
+print(factorial(20))`
     },
     {
       name: "JavaScript",
-      description: "The language that brought interactivity to the web",
-      example: "console.log(\"Hello, World!\");"
+      description: "Web scripting language",
+      example: `function factorial(n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+}
+
+console.log(factorial(20));`
     },
     {
-      name: "Go",
-      description: "Modern language designed for efficient concurrency and scalability",
-      example: "package main\n\nimport \"fmt\"\n\nfunc main() {\n  fmt.Println(\"Hello, World!\")\n}"
+      name: "Java",
+      description: "Platform-independent OOP",
+      example: `public class Main {
+    public static long factorial(int n) {
+        return n <= 1 ? 1 : n * factorial(n - 1);
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(factorial(20));
+    }
+}`
     },
     {
-      name: "Scratch",
-      description: "Visual programming that introduces coding to new generations",
-      example: "when green flag clicked\nsay [Hello, World!] for (2) seconds"
+      name: "C",
+      description: "System programming language",
+      example: `#include <stdio.h>
+
+long factorial(int n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+}
+
+int main() {
+    printf("%ld\\n", factorial(20));
+    return 0;
+}`
+    },
+    {
+      name: "C++",
+      description: "Object-oriented systems programming",
+      example: `#include <iostream>
+
+long factorial(int n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+}
+
+int main() {
+    std::cout << factorial(20) << "\\n";
+    return 0;
+}`
     }
   ];
 
-  const [languageOne, setLanguageOne] = useState(languages[5]); // Python
-  const [languageTwo, setLanguageTwo] = useState(languages[6]); // JavaScript
+  const [languageOne, setLanguageOne] = useState(languages[1]); // JavaScript
+  const [languageTwo, setLanguageTwo] = useState(languages[0]); // Python
   const [codeOne, setCodeOne] = useState('');
   const [codeTwo, setCodeTwo] = useState('');
-  const [resultOne, setResultOne] = useState('');
-  const [resultTwo, setResultTwo] = useState('');
+  const [resultOne, setResultOne] = useState({ output: '', metrics: null });
+  const [resultTwo, setResultTwo] = useState({ output: '', metrics: null });
   const [comparison, setComparison] = useState(null);
   const [isExecuting, setIsExecuting] = useState(false);
 
@@ -70,139 +100,122 @@ function TestBench() {
   const handleLanguageOneChange = (e) => {
     const selected = languages.find(lang => lang.name === e.target.value);
     setLanguageOne(selected);
-    setResultOne('');
+    setResultOne({ output: '', metrics: null });
     setComparison(null);
   };
 
   const handleLanguageTwoChange = (e) => {
     const selected = languages.find(lang => lang.name === e.target.value);
     setLanguageTwo(selected);
-    setResultTwo('');
+    setResultTwo({ output: '', metrics: null });
     setComparison(null);
   };
 
-  const handleCodeOneChange = (e) => {
-    setCodeOne(e.target.value);
-  };
+  const executeWithCodeCompiler = async (language, code) => {
+    const langCode = languageMappings[language];
+    if (!langCode) return { error: 'Language not supported' };
 
-  const handleCodeTwoChange = (e) => {
-    setCodeTwo(e.target.value);
-  };
-
-  const analyzeCodeComplexity = (code) => {
-    // Very simplistic complexity analysis
-    const lines = code.split('\n').filter(line => line.trim().length > 0);
-    const loops = code.match(/for|while|do/g)?.length || 0;
-    const conditionals = code.match(/if|else|case/g)?.length || 0;
+    const startTime = performance.now();
     
-    if (loops > 2 || conditionals > 3) return 'O(n²)';
-    if (loops > 0 || conditionals > 1) return 'O(n)';
-    return 'O(1)';
+    const options = {
+      method: 'POST',
+      url: CODE_COMPILER_API.url,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': CODE_COMPILER_API.key,
+        'X-RapidAPI-Host': CODE_COMPILER_API.host
+      },
+      data: new URLSearchParams({
+        LanguageChoice: langCode,
+        Program: code
+      })
+    };
+
+    try {
+      const response = await axios.request(options);
+      const endTime = performance.now();
+      
+      // Estimate memory usage based on language (rough approximation)
+      const memoryEstimate = {
+        'Python': 4000,    // KB
+        'JavaScript': 8000,
+        'Java': 12000,
+        'C': 2000,
+        'C++': 2500
+      }[language] || 0;
+      
+      return {
+        output: response.data.Result || response.data.Errors || 'No output',
+        time: endTime - startTime,
+        memory: memoryEstimate,
+        status: response.data.Errors ? 'Error' : 'Success'
+      };
+    } catch (error) {
+      return {
+        output: error.message,
+        time: 0,
+        memory: 0,
+        status: 'Error'
+      };
+    }
   };
 
-  const simulateExecution = (language, code) => {
-    // Simulate different performance characteristics based on language
-    const baseTime = Math.random() * 100 + 50; // 50-150ms base
-    const baseMemory = Math.random() * 10 + 5; // 5-15MB base
-    
-    let timeFactor = 1;
-    let memoryFactor = 1;
-    let timeComplexity = analyzeCodeComplexity(code);
-    let memoryComplexity = analyzeCodeComplexity(code);
+  const compareExecution = async () => {
+    setIsExecuting(true);
+    setComparison(null);
 
-    switch(language.name) {
-      case 'Machine Code & Assembly':
-        timeFactor = 0.2;
-        memoryFactor = 0.5;
-        break;
-      case 'Fortran':
-        timeFactor = 0.8;
-        memoryFactor = 0.9;
-        break;
-      case 'COBOL':
-        timeFactor = 1.5;
-        memoryFactor = 1.2;
-        break;
-      case 'C':
-        timeFactor = 0.7;
-        memoryFactor = 0.7;
-        break;
-      case 'Java':
-        timeFactor = 1.2;
-        memoryFactor = 1.5;
-        break;
-      case 'Python':
-        timeFactor = 1.8;
-        memoryFactor = 1.7;
-        break;
-      case 'JavaScript':
-        timeFactor = 1.5;
-        memoryFactor = 1.3;
-        break;
-      case 'Go':
-        timeFactor = 0.9;
-        memoryFactor = 0.8;
-        break;
-      case 'Scratch':
-        timeFactor = 2.5;
-        memoryFactor = 2.0;
-        break;
-      default:
-        timeFactor = 1;
-        memoryFactor = 1;
+    // Execute both codes in parallel
+    const [res1, res2] = await Promise.all([
+      executeWithCodeCompiler(languageOne.name, codeOne),
+      executeWithCodeCompiler(languageTwo.name, codeTwo)
+    ]);
+
+    setResultOne({
+      output: res1.output,
+      metrics: {
+        time: res1.time,
+        memory: res1.memory,
+        status: res1.status
+      }
+    });
+
+    setResultTwo({
+      output: res2.output,
+      metrics: {
+        time: res2.time,
+        memory: res2.memory,
+        status: res2.status
+      }
+    });
+
+    if (res1.time && res2.time) {
+      setComparison({
+        timeDifference: ((res1.time - res2.time) / res2.time * 100).toFixed(2),
+        memoryDifference: ((res1.memory - res2.memory) / res2.memory * 100).toFixed(2)
+      });
     }
 
-    const executionTime = (baseTime * timeFactor).toFixed(2);
-    const memoryUsage = (baseMemory * memoryFactor).toFixed(2);
-
-    return {
-      executionTime,
-      memoryUsage,
-      timeComplexity,
-      memoryComplexity,
-      output: `Executed ${language.name} code:\n\n${code || 'No code provided'}\n\nOutput:\nHello, World!`
-    };
-  };
-
-  const executeCode = () => {
-    setIsExecuting(true);
-    
-    // Simulate execution delay
-    setTimeout(() => {
-      const result1 = simulateExecution(languageOne, codeOne);
-      const result2 = simulateExecution(languageTwo, codeTwo);
-      
-      setResultOne(result1.output);
-      setResultTwo(result2.output);
-      
-      setComparison({
-        timeDifference: ((result1.executionTime - result2.executionTime) / result2.executionTime * 100).toFixed(2),
-        memoryDifference: ((result1.memoryUsage - result2.memoryUsage) / result2.memoryUsage * 100).toFixed(2),
-        metrics: {
-          lang1: {
-            executionTime: result1.executionTime,
-            memoryUsage: result1.memoryUsage,
-            timeComplexity: result1.timeComplexity,
-            memoryComplexity: result1.memoryComplexity
-          },
-          lang2: {
-            executionTime: result2.executionTime,
-            memoryUsage: result2.memoryUsage,
-            timeComplexity: result2.timeComplexity,
-            memoryComplexity: result2.memoryComplexity
-          }
-        }
-      });
-      
-      setIsExecuting(false);
-    }, 1000);
+    setIsExecuting(false);
   };
 
   const getEfficiencyBadge = (difference) => {
+    if (difference === 'N/A') return { class: 'badge-warning', text: 'N/A' };
     const diff = parseFloat(difference);
-    if (diff < -10) return { class: 'badge-success', text: 'Faster' };
-    if (diff > 10) return { class: 'badge-danger', text: 'Slower' };
+    if (diff < -15) return { class: 'badge-success', text: 'Much Faster' };
+    if (diff < -5) return { class: 'badge-success', text: 'Faster' };
+    if (diff > 15) return { class: 'badge-danger', text: 'Much Slower' };
+    if (diff > 5) return { class: 'badge-danger', text: 'Slower' };
     return { class: 'badge-warning', text: 'Similar' };
+  };
+
+  const getMemoryDescription = (difference) => {
+    if (difference === 'N/A') return { class: 'badge-warning', text: 'N/A' };
+    const diff = parseFloat(difference);
+    if (diff < -15) return { class: 'badge-success', text: 'Much Less Memory' };
+    if (diff < -5) return { class: 'badge-success', text: 'Less Memory' };
+    if (diff > 15) return { class: 'badge-danger', text: 'Much More Memory' };
+    if (diff > 5) return { class: 'badge-danger', text: 'More Memory' };
+    return { class: 'badge-warning', text: 'Similar Memory' };
   };
 
   return (
@@ -211,16 +224,12 @@ function TestBench() {
         <h1>Programming Language Test Bench</h1>
         
         <div className="testbench-grid">
-          {/* First Language Column */}
           <div className="testbench-column">
             <div className="column-header">
               <h2>{languageOne.name} Code</h2>
               <div className="language-selector">
                 <span className="language-selector-label">Select Language:</span>
-                <select 
-                  value={languageOne.name}
-                  onChange={handleLanguageOneChange}
-                >
+                <select value={languageOne.name} onChange={handleLanguageOneChange}>
                   {languages.map(lang => (
                     <option key={`lang1-${lang.name}`} value={lang.name}>
                       {lang.name}
@@ -237,22 +246,18 @@ function TestBench() {
               <textarea
                 id="code-one"
                 value={codeOne}
-                onChange={handleCodeOneChange}
+                onChange={(e) => setCodeOne(e.target.value)}
                 placeholder={languageOne.example}
               />
             </div>
           </div>
 
-          {/* Second Language Column */}
           <div className="testbench-column">
             <div className="column-header">
               <h2>{languageTwo.name} Code</h2>
               <div className="language-selector">
                 <span className="language-selector-label">Select Language:</span>
-                <select 
-                  value={languageTwo.name}
-                  onChange={handleLanguageTwoChange}
-                >
+                <select value={languageTwo.name} onChange={handleLanguageTwoChange}>
                   {languages.map(lang => (
                     <option key={`lang2-${lang.name}`} value={lang.name}>
                       {lang.name}
@@ -269,7 +274,7 @@ function TestBench() {
               <textarea
                 id="code-two"
                 value={codeTwo}
-                onChange={handleCodeTwoChange}
+                onChange={(e) => setCodeTwo(e.target.value)}
                 placeholder={languageTwo.example}
               />
             </div>
@@ -279,14 +284,19 @@ function TestBench() {
         <div className="execute-btn-container">
           <button 
             className="execute-btn" 
-            onClick={executeCode}
+            onClick={compareExecution}
             disabled={isExecuting}
           >
-            {isExecuting ? 'Executing...' : 'Compare Code Execution'}
+            {isExecuting ? (
+              <>
+                <span className="spinner"></span> Executing...
+              </>
+            ) : (
+              'Compare Code Execution'
+            )}
           </button>
         </div>
 
-        {/* Comparison Metrics */}
         {comparison && (
           <div className="comparison-container">
             <div className="comparison-header">
@@ -299,18 +309,16 @@ function TestBench() {
                   <FaClock /> Execution Time
                 </div>
                 <div className="metric-value">
-                  {languageOne.name}: {comparison.metrics.lang1.executionTime}ms
+                  {languageOne.name}: {resultOne.metrics?.time ? `${resultOne.metrics.time.toFixed(2)}ms` : 'N/A'}
                   <span className={`efficiency-badge ${getEfficiencyBadge(comparison.timeDifference).class}`}>
                     {getEfficiencyBadge(comparison.timeDifference).text}
                   </span>
                 </div>
                 <div className="metric-value">
-                  {languageTwo.name}: {comparison.metrics.lang2.executionTime}ms
+                  {languageTwo.name}: {resultTwo.metrics?.time ? `${resultTwo.metrics.time.toFixed(2)}ms` : 'N/A'}
                 </div>
                 <div className="metric-description">
-                  Time Complexity: <span className="big-o-notation">
-                    {comparison.metrics.lang1.timeComplexity} vs {comparison.metrics.lang2.timeComplexity}
-                  </span>
+                  Lower values indicate better performance
                 </div>
               </div>
 
@@ -319,62 +327,74 @@ function TestBench() {
                   <FaMemory /> Memory Usage
                 </div>
                 <div className="metric-value">
-                  {languageOne.name}: {comparison.metrics.lang1.memoryUsage}MB
-                  <span className={`efficiency-badge ${getEfficiencyBadge(comparison.memoryDifference).class}`}>
-                    {getEfficiencyBadge(comparison.memoryDifference).text}
+                  {languageOne.name}: {resultOne.metrics?.memory !== null ? `${resultOne.metrics.memory}KB` : 'N/A'}
+                  <span className={`efficiency-badge ${getMemoryDescription(comparison.memoryDifference).class}`}>
+                    {getMemoryDescription(comparison.memoryDifference).text}
                   </span>
                 </div>
                 <div className="metric-value">
-                  {languageTwo.name}: {comparison.metrics.lang2.memoryUsage}MB
+                  {languageTwo.name}: {resultTwo.metrics?.memory !== null ? `${resultTwo.metrics.memory}KB` : 'N/A'}
                 </div>
                 <div className="metric-description">
-                  Memory Complexity: <span className="big-o-notation">
-                    {comparison.metrics.lang1.memoryComplexity} vs {comparison.metrics.lang2.memoryComplexity}
-                  </span>
-                </div>
-              </div>
-
-              <div className="metric-card">
-                <div className="metric-title">
-                  <FaChartLine /> Relative Performance
-                </div>
-                <div className="metric-value">
-                  {Math.abs(comparison.timeDifference)}% {parseFloat(comparison.timeDifference) > 0 ? 'slower' : 'faster'}
-                </div>
-                <div className="metric-description">
-                  {languageOne.name} is {Math.abs(comparison.timeDifference)}% {parseFloat(comparison.timeDifference) > 0 ? 'slower' : 'faster'} than {languageTwo.name} in execution time
-                </div>
-              </div>
-
-              <div className="metric-card">
-                <div className="metric-title">
-                  <FaMicrochip /> Memory Efficiency
-                </div>
-                <div className="metric-value">
-                  {Math.abs(comparison.memoryDifference)}% {parseFloat(comparison.memoryDifference) > 0 ? 'more' : 'less'} memory
-                </div>
-                <div className="metric-description">
-                  {languageOne.name} uses {Math.abs(comparison.memoryDifference)}% {parseFloat(comparison.memoryDifference) > 0 ? 'more' : 'less'} memory than {languageTwo.name}
+                  Lower values indicate better memory efficiency
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Results Section */}
-        {(resultOne || resultTwo) && (
+        {(resultOne.output || resultTwo.output) && (
           <div className="results-container">
             <div className="result-panel">
               <div className="result-header">
                 <div className="result-title">{languageOne.name} Results</div>
+                {resultOne.metrics?.time && (
+                  <div className="result-time">{resultOne.metrics.time.toFixed(2)} ms</div>
+                )}
               </div>
-              <pre className="result-content">{resultOne}</pre>
+              <Highlight
+                theme={themes.nightOwl}
+                code={resultOne.output}
+                language={languageOne.name.toLowerCase()}
+              >
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} result-content`} style={style}>
+                    {tokens.map((line, i) => (
+                      <div key={i} {...getLineProps({ line })}>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
             </div>
+
             <div className="result-panel">
               <div className="result-header">
                 <div className="result-title">{languageTwo.name} Results</div>
+                {resultTwo.metrics?.time && (
+                  <div className="result-time">{resultTwo.metrics.time.toFixed(2)} ms</div>
+                )}
               </div>
-              <pre className="result-content">{resultTwo}</pre>
+              <Highlight
+                theme={themes.nightOwl}
+                code={resultTwo.output}
+                language={languageTwo.name.toLowerCase()}
+              >
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} result-content`} style={style}>
+                    {tokens.map((line, i) => (
+                      <div key={i} {...getLineProps({ line })}>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
             </div>
           </div>
         )}
