@@ -31,6 +31,40 @@
   z-index: 0;
 }
 
+.github-corner {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  text-decoration: none;
+  color: var(--light);
+  font-weight: 600;
+  z-index: 10;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-corner:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.github-logo {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.github-corner:hover .github-logo {
+  transform: rotate(10deg) scale(1.1);
+}
+
 .content-container {
   text-align: center;
   max-width: 1200px;
@@ -174,19 +208,6 @@ h2::after {
   z-index: 1;
 }
 
-.primary-button {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-}
-
-.secondary-button {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--light);
-}
-
-.secondary-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 .button::before {
   content: '';
   position: absolute;
@@ -230,5 +251,17 @@ h2::after {
   .button {
     width: 100%;
     text-align: center;
+  }
+
+  .github-corner {
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .github-logo {
+    width: 20px;
+    height: 20px;
   }
 }

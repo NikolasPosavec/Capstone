@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import landingImage from '../assets/chc_ascii.png';  
+import landingImage from '../assets/chc_ascii.png';
+import octocatLogo from '../assets/octocat.png'; // Make sure to add this image to your assets
 
 function Home() {
   const languages = [
@@ -41,6 +42,16 @@ function Home() {
 
   return (
     <div className="home-container">
+      <a 
+        href="https://github.com/NikolasPosavec" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="github-corner"
+      >
+        <img src={octocatLogo} alt="GitHub" className="github-logo" />
+        <span>GitHub</span>
+      </a>
+
       <div className="content-container">
         <div className="hero-section">
           <h1>Explore the Evolution of Programming Languages</h1>
@@ -50,7 +61,6 @@ function Home() {
           </p>
           <div className="button-section">
             <Link to="/timeline" className="button">Explore Timeline</Link>
-            <Link to="/testbench" className="button">Try Test Bench</Link>
           </div>
         </div>
 
