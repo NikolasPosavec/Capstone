@@ -50,12 +50,6 @@ const languages = [
     year: "2007",
     name: "Scratch",
     description: "Introductory visual programming"
-  },
-  {
-    id: "go",
-    year: "2009",
-    name: "Go",
-    description: "Modern concurrency"
   }
 ];
 

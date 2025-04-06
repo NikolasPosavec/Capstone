@@ -7,6 +7,7 @@ import fortranImage from '../assets/fortran.png';
 import cobolImage from '../assets/cobol.png';
 import cImage from '../assets/c.png';
 import pythonImage from '../assets/python.png';
+import javaImage from '../assets/java.png';
 
 const timelineEntries = {
   "machine-code": {
@@ -214,10 +215,76 @@ const timelineEntries = {
           allowFullScreen>
         </iframe>
       </div>
+
+      <p>To run this program, I simply clicked the run button on my IDE, Visual Studio Code. This does the same sort of thing as previous times: </p>
+      
+      <p>python tempConverter.py </p>
+
+      <p>The program asks the user to input temperature and units, processes the inputs, performs the calculations, and then prints the answer. This simple Python program displays the language’s ease of use and readability. </p>
       </>
     )
-  }
-};
+  },
+  "java": {
+    title: "Java",
+    year: "1995",
+    content: (
+      <>
+      <p>Java was a revolutionary programming language at its release date because of its main objective: platform independence. The language was developed by a company called Sun Microsystems in 1995 and was meant to be a direct response to C’s flaws. C required users to recompile code every time that they switched from one system to another. Java solved this problem by developing the write once, run anywhere principle. They accomplished this through the Java Virtual Machine (JVM), and this allowed Java source code to be compiled into bytecode that was executable on any device that could run with a JVM. This unique feature made Java the industry standard for cross-platform development environments. </p>
+      
+      <p>Java has had a massive impact on the world of software development at all levels. Along with the JVM, the language introduced the world to object-oriented programming (OOP) and was equipped with an extensive library system that contained resources to build anything from the smallest desktop application to the most large-scale enterprise systems. Another way that Java improved upon C was through automatic memory management. This garbage collection system implemented by Java made memory leaks that were common in C virtually nonexistent. </p>
+
+      <p>Java completely redefined software development through innovations in cross-platform compatibility, its object-oriented principles, and effective memory management. With this, Java became the gold standard for all levels and types of development including Android development, enterprise applications, and various backend systems. Although Java is not one of the most modern languages, it has proved to be a main stay in the software engineering world as it continues to release regular updates under its new ownership, Oracle. Java was able to capitalize on the weaknesses of other languages whilst maintaining low-level language efficiency. Java is in my opinion the perfect balance of power and ease of use.  </p> 
+
+      <div className="image-container">
+          <img src={javaImage} alt="Java Interest Calculator" className="centered-image" />
+          <p className="image-caption">Java Interest Calculator</p>
+        </div>  
+      
+      <p>The Java program I wrote is a simple interest calculator that prompts the user for three values—principal amount, annual interest rate, and years—and then computes the interest rate using a formula. This program is good for demonstrating Java’s structure and how it is an object-oriented language. </p>
+
+      <p>Line 1 simply imports the Scanner class from the Java Utilities library. This is one of the many free libraries that you get with Java and is the key to making programs interactive. </p> 
+
+      <p>Line 5 defines the “main” method which is the entry point for every Java program to be executable. </p>
+
+      <p>Lines 9-16 prompt the user to input using System.out.print to display text and then stores responses using the Scanner class. These three inputs are then assigned to three separate variables: principal, rate, and time. </p>
+
+      <p>Lines 18-19 compute the interest rate, store it in a variable called interest, and then prints out the number assigned to the interest variable. Line 21 just closes Scanner to free resources. </p>
+      
+      <div className="video-container centered-video">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/KTLGqWeWFGs"
+          title="C Programming Demonstration"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen>
+        </iframe>
+      </div>
+
+      <p>To run this program, I simply clicked the run button on my IDE, Visual Studio Code. This does the same sort of thing as previous times: </p>
+      
+      <p>javac interestCalc.java </p>
+
+      <p>java interestCalc </p>
+
+      <p>The program prompts the user to enter three values: the principal amount, the annual interest rate (in percentage), and the time in years. It uses the Scanner class to read these inputs. Once the inputs are collected, the program calculates the simple interest using the formula (principal * rate * time) / 100. Finally, it displays the calculated interest to the user and closes the Scanner to release resources. This program is a simple implementation of a basic interest calculator. </p>
+      
+      </>
+    )
+  },
+  "javascript": {
+    title: "JavaScript",
+    year: "1995",
+    content: (
+      <>
+      <p>JavaScript’s release in 1995 was revolutionary for web development. The language’s focus was to enable dynamic and interactive web pages. Brendan Eich was the developer of the language who worked at Netscape and created the language because he wanted a scripting language that was lightweight and worked well with Java. Websites in the 1990s and earlier were very “boring” and static. Users were often left to fumble around with confusing menus that were unresponsive and frustrating. JavaScript was so integral to solving this problem because it allowed for client-side interaction without the need to report every communication to the server. This essentially meant that developers were no longer bottlenecked by technical issues and ultimately led to the rise of dynamic web apps. </p>
+      
+      
+      </>
+    )
+}
+}
 
 function TimelineEntry() {
   const { id } = useParams();
