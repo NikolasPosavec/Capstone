@@ -196,6 +196,24 @@ const timelineEntries = {
         </div>  
 
       <p>This Python program is a simple temperature converter that prompts the user to provide a value for temperature and the units they are using. The program will then convert the user’s input temperature to the opposite unit using known conversion formulas. </p>    
+      
+      <p>Lines 1-6 create two functions: Celsius to Fahrenheit and Fahrenheit to Celsius. Both functions work by intaking a number and then returning a converted temperature. </p>
+
+      <p>Lines 7-8 prompt the user to enter a numerical value for temperature and then ask the user to specify which units they are using. The input() function takes user input and .strip().upper() makes sure that the provided String is formatted correctly so the comparison can be executed.</p> 
+      
+      <p>Lines 10-15 have an if-elif chain that is used to determine which of the two previously defined functions should be called based upon the user’s inputs. The final answer is then printed out in a formatted string. Also, if the user inputs a unit that is invalid, a error message is printed accordingly. </p>
+      
+      <div className="video-container centered-video">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/omxIyrz3GxY"
+          title="C Programming Demonstration"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen>
+        </iframe>
+      </div>
       </>
     )
   }
