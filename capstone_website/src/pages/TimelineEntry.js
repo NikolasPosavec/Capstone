@@ -8,6 +8,8 @@ import cobolImage from '../assets/cobol.png';
 import cImage from '../assets/c.png';
 import pythonImage from '../assets/python.png';
 import javaImage from '../assets/java.png';
+import javascriptImage from '../assets/javascript.png';
+import scratchImage from '../assets/scratch.png';
 
 const timelineEntries = {
   "machine-code": {
@@ -280,10 +282,65 @@ const timelineEntries = {
       <>
       <p>JavaScript’s release in 1995 was revolutionary for web development. The language’s focus was to enable dynamic and interactive web pages. Brendan Eich was the developer of the language who worked at Netscape and created the language because he wanted a scripting language that was lightweight and worked well with Java. Websites in the 1990s and earlier were very “boring” and static. Users were often left to fumble around with confusing menus that were unresponsive and frustrating. JavaScript was so integral to solving this problem because it allowed for client-side interaction without the need to report every communication to the server. This essentially meant that developers were no longer bottlenecked by technical issues and ultimately led to the rise of dynamic web apps. </p>
       
-      
+      <p>In web development there are two “worlds”, front-end development and back-end development. Front-end development is basically everything that a user will see (ex. buttons, links, titles, etc.) and back-end development is the code that makes those things functional (ex. script for a game that will make those button presses developed in the frontend have meaning). Initially, JavaScript was almost exclusively for front-end scripting. However, as the language existed for a longer period of time, more resources like Node.js were created allowing JavaScript to be useful for back-end development as well. JavaScript also had the advantage of being an interpreted language which made the whole development process much easier. The language has the tools to be a very accessible and prototype-oriented language that allowed for flexibility in web development that was previously unseen. As mentioned earlier, JavaScript is aging well as the ecosystem around it continues to grow at a rapid rate with modern frameworks and libraries like React, Angular, and Vue continuing to innovate and change how web apps are built.</p>
+    
+      <p>JavaScript is the backbone of modern web development and redefined how software development operates. Now, JavaScript is utilized in some form on almost every web page powering the smallest web apps to the most large-scale operations. Although JavaScript has been so revolutionary, some developers still criticize it heavily. JavaScript is often targeted for its loosely typed syntax and the inconsistencies that arise across different browsers. Developers have tried to combat these issues through a mechanism called ECMAScript. ECMAScript has helped to make the language more modern and standardized. Overall, JavaScript did a phenomenal job of capitalizing on the internet boom in the 1990s and has done extremely well to remain so relevant in a web development scene that is constantly evolving. </p> 
+
+      <div className="image-container">
+          <img src={javascriptImage} alt="JavaScript Website Snippet" className="centered-image" />
+          <p className="image-caption">JavaScript Website Snippet</p>
+        </div> 
+
+      <p>This is one of the many JavaScript (js) programs I have written in order to create a website to go along with my capstone presentation at the symposium. This Home.js file is simply the landing page of my website. I used a python program to generate a picture of the Calvert Hall cardinal in ASCII characters and colored using ANSI color escape codes. The website is also built using the react framework. The imports of react assets and my ASCII cardinal are lines 2-5. Getting into the actual js code, I first make the titles on the website then the short description of my capstone, this all happens from lines 9-15. Next, on lines 17-30, I am making a list of all the programming languages that my project is about and a short description of what their importance is. I then make the buttons to navigate to the other pages of the website on lines 32-35 allowing the user to navigate the site smoothly. Lastly, line 41 makes sure that the home page can be used anywhere else in the scope of my app.</p> 
+
+      <div className="video-container centered-video">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/t9o_6aTuYVs"
+          title="Javascript Programming Demonstration"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen>
+        </iframe>
+      </div>
       </>
     )
-}
+  },
+  "scratch": {
+    title: "Scratch",
+    year: "2003",
+    content: (
+      <>
+      <p>Scratch is a very different programming language than all my other entries, well visually at least. Scratch is unique because it is a visual programming language. This is one of the highest levels of abstraction and the reason being that MIT wanted to create a language that was intuitive and easy for beginners to understand. Scratch throws syntax and typing much of anything out the window and instead takes the approach of a drag and drop block system. Each color group of blocks is meant to represent different types of functions, and they can be connected by dragging them onto each other. This makes it so that beginners aren’t overwhelmed by confusing syntax and can focus on building core thinking skills for programming. The language is also set up to be fun by nature with its sprite-based environment which allows users to easily make simple games or stories with very little effort. Scratch’s ecosystem is all about collaboration and learning from others, so users can view other projects or even give suggestions in the comments of a Scratch “program”.</p>
+      
+      <p>Although Scratch is highly impractical for any serious programmers, that is not its purpose. This language is a beautiful demonstration of how abstraction can make programming so much more accessible and fun for beginners. Scratch lays a great foundation for people to transition later on into more complex languages so that they won’t be confused about the hard part, logic. Scratch is the perfect example for showing that coding is about so much more than typing on a keyboard, it is a whole new way of thinking.</p>
+
+      <p>For my scratch program I made a simple quiz game about some basic computer science topics. The bulk of the code is below:</p> 
+
+      <div className="image-container">
+          <img src={scratchImage} alt="Scratch Quiz Game" className="centered-image" />
+          <p className="image-caption">Scratch Quiz Game</p>
+        </div>
+
+      <p> Immediately, it is clear that Scratch is much more visually appealing and intuitive than other more complex languages. While some of these entry code examples took me hours, this took me at most 45 minutes to create because of how simple and easy it is to work with. There is a lot of plain English words and no confusing syntax or untraceable runtime errors.</p> 
+
+      <div className="video-container centered-video">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/b2pbqI0ENXY"
+          title="Javascript Programming Demonstration"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen>
+        </iframe>
+      </div>
+      
+
+      </>
+    )
+  }
 }
 
 function TimelineEntry() {
