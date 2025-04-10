@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import TimelineEntry from './pages/TimelineEntry';
-import TestBench from './pages/TestBench';
+import WorksCited from './pages/WorksCited';
 import './App.css';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/timeline/:id" element={<TimelineEntry />} />
-        <Route path="/testbench" element={<TestBench />} />
+        <Route path="/workscited" element={<WorksCited />} />
       </Routes>
     </Router>
   );

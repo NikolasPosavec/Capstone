@@ -1,6 +1,8 @@
 :root {
   --primary: #ff4757;
   --primary-dark: #e84118;
+  --secondary: #ff4757;
+  --secondary-dark: #e84118;
   --dark: #1e272e;
   --darker: #1a1a1a;
   --light: #f5f6fa;
@@ -183,29 +185,45 @@ h2::after {
   font-size: 1.1rem;
 }
 
-.button-section {
+/* Button Group Styles */
+.button-group {
   display: flex;
+  gap: 2rem;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 3rem;
+  margin: 2rem 0;
   flex-wrap: wrap;
 }
 
 .button {
-  text-decoration: none;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+  text-align: center;
+  font-weight: 600;
   border: none;
   cursor: pointer;
+  min-width: 180px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+}
+
+.secondary-btn {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  color: white;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .button::before {
@@ -221,9 +239,8 @@ h2::after {
   z-index: -1;
 }
 
-.button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+.secondary-btn::before {
+  background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary) 100%);
 }
 
 .button:hover::before {
@@ -243,14 +260,15 @@ h2::after {
     font-size: 1.1rem;
   }
   
-  .button-section {
-    flex-direction: column;
+  .button-group {
     gap: 1rem;
+    margin: 1.5rem 0;
   }
   
   .button {
     width: 100%;
-    text-align: center;
+    min-width: auto;
+    padding: 0.8rem 1.5rem;
   }
 
   .github-corner {

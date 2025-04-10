@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import landingImage from '../assets/chc_ascii.png';
-import octocatLogo from '../assets/octocat.png'; // Make sure to add this image to your assets
+import octocatLogo from '../assets/octocat.png';
 
 function Home() {
   const languages = [
@@ -59,8 +59,9 @@ function Home() {
             From machine code to modern abstractions - discover how programming languages 
             have shaped the digital world
           </p>
-          <div className="button-section">
-            <Link to="/timeline" className="button">Explore Timeline</Link>
+          <div className="button-group">
+            <Link to="/timeline" className="button primary-btn">Explore Timeline</Link>
+            <Link to="/workscited" className="button secondary-btn">Works Cited</Link>
           </div>
         </div>
 
@@ -69,10 +70,6 @@ function Home() {
           alt="Programming Languages Evolution" 
           className="landing-image" 
         />
-        <p>
-          Explore the fascinating journey of programming languages from their lowest-level 
-          foundations to modern high-level abstractions that power today's digital world.
-        </p>
         
         <section className="languages-section">
           <h2>Featured Languages</h2>
