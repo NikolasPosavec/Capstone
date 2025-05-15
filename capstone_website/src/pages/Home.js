@@ -52,6 +52,7 @@ function Home() {
           <div className="button-group">
             <Link to="/timeline" className="button primary-btn">Explore Timeline</Link>
             <Link to="/workscited" className="button secondary-btn">Works Cited</Link>
+            <Link to="/presentation" className="button primary-btn">Live Presentation</Link>
           </div>
         </div>
 
