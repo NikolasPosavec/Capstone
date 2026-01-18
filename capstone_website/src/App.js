@@ -11,13 +11,14 @@ import octocatLogo from './assets/octocat.png';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const basename = process.env.PUBLIC_URL || '/';
 
   useEffect(() => {
     document.body.className = darkMode ? 'dark-mode' : 'light-mode';
   }, [darkMode]);
 
   return (
-    <Router>
+    <Router basename={basename}>
       <a 
         href="https://github.com/NikolasPosavec" 
         target="_blank" 
