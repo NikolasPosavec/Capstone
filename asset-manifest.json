@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Capstone/static/css/main.e81f880a.css",
+    "main.js": "/Capstone/static/js/main.d0ac441a.js",
+    "static/js/453.6657ba7c.chunk.js": "/Capstone/static/js/453.6657ba7c.chunk.js",
+    "static/media/java.png": "/Capstone/static/media/java.b72fb6f951855cb505b7.png",
+    "static/media/javascript.png": "/Capstone/static/media/javascript.89ed8c2db07ae9b22a14.png",
+    "static/media/scratch.png": "/Capstone/static/media/scratch.61a9c6863d9199724d96.png",
+    "static/media/citation1_pic.png": "/Capstone/static/media/citation1_pic.488e31d3f979b200b009.png",
+    "static/media/citation7_pic.png": "/Capstone/static/media/citation7_pic.18d79ae3fd94afb45e92.png",
+    "static/media/cobol.png": "/Capstone/static/media/cobol.ad97c8c67280cd49d806.png",
+    "static/media/chc_ascii.png": "/Capstone/static/media/chc_ascii.914ae63b2092b7737513.png",
+    "static/media/code_comparison.png": "/Capstone/static/media/code_comparison.a051dd7a52f72bfa5ff3.png",
+    "static/media/c.png": "/Capstone/static/media/c.6ff14c0da336df77776d.png",
+    "static/media/fortran.png": "/Capstone/static/media/fortran.2b12389ecb6de898719d.png",
+    "static/media/python.png": "/Capstone/static/media/python.1e87e76391ccb202cfdb.png",
+    "static/media/punch_cards.jpg": "/Capstone/static/media/punch_cards.2676fc9e2e3248529ab4.jpg",
+    "index.html": "/Capstone/index.html",
+    "main.e81f880a.css.map": "/Capstone/static/css/main.e81f880a.css.map",
+    "main.d0ac441a.js.map": "/Capstone/static/js/main.d0ac441a.js.map",
+    "453.6657ba7c.chunk.js.map": "/Capstone/static/js/453.6657ba7c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e81f880a.css",
+    "static/js/main.d0ac441a.js"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build cobol",
+        "type": "shell",
+        "command": "cobc",
+        "args": [
+          "-x",       // To compile and run the program
+          "payroll.cob"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Compile and run COBOL program"
+      }
+    ]
+  }
+  

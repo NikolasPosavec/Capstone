@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build factorial",
+        "type": "shell",
+        "command": "gfortran",
+        "args": [
+          "-o", "factorial", "factorial.f90"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Compile the factorial Fortran program"
+      },
+      {
+        "label": "run factorial",
+        "type": "shell",
+        "command": "./factorial",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "dependsOn": "build factorial",
+        "detail": "Run the compiled factorial program"
+      }
+    ]
+  }
+  
