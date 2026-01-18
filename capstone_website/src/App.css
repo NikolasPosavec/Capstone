@@ -19,6 +19,7 @@ body.dark-mode {
   --darker: #1a1a1a;
   --light: #f5f6fa;
   --gray: #7f8fa6;
+  --light-gray: #a5b1c2;
   --code-bg: #282c34;
   --success: #2ecc71;
   --warning: #f39c12;
@@ -34,6 +35,7 @@ body.light-mode {
   --darker: #e9ecef;
   --light: #212529;
   --gray: #6c757d;
+  --light-gray: #495057;
   --code-bg: #f8f9fa;
   --success: #28a745;
   --warning: #ffc107;

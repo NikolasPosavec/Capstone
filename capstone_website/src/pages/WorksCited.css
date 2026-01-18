@@ -8,6 +8,11 @@
     color: var(--light);
     line-height: 1.6;
   }
+
+  body.light-mode .works-cited-container {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
   
   .works-cited-container h1 {
     color: var(--primary);
@@ -30,6 +35,10 @@
   .citation-description {
     margin-bottom: 1rem;
     color: var(--light-gray);
+  }
+
+  body.light-mode .citation-entry {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
   
   .citation-image {
