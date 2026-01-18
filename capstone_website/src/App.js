@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import TimelineEntry from './pages/TimelineEntry';
@@ -11,14 +11,12 @@ import octocatLogo from './assets/octocat.png';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const basename = process.env.PUBLIC_URL || '/';
-
   useEffect(() => {
     document.body.className = darkMode ? 'dark-mode' : 'light-mode';
   }, [darkMode]);
 
   return (
-    <Router basename={basename}>
+    <Router>
       <a 
         href="https://github.com/NikolasPosavec" 
         target="_blank" 
